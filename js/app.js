@@ -13,28 +13,38 @@
  * 
 */
 
-/**
- * Define Global Variables
- * 
-*/
+// Define Global Variables
+const sections = document.querySelectorAll("section");
+const navbar = document.getElementById("navbar__list");
 
+// Build the nav
+for (let i = 0; i < sections.length; i++) {
 
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
+    const li = document.createElement("li");
 
+    li.innerHTML = `<a href="#${sections[i].id}"> ${sections[i].id}</a>`;
 
+    navbar.appendChild(li);
+};
 
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
+// Scroll back to top
+// reference: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
+const button = document.getElementById("go__back");
 
-// build the nav
+window.onscroll = function() {scroll()};
 
+function scroll() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    button.style.display = "block";
+  } else {
+    button.style.display = "none";
+  }
+};
+
+function goBack() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+};
 
 // Add class 'active' to section when near top of viewport
 
