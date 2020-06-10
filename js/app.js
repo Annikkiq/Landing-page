@@ -11,11 +11,12 @@
  * 
  * JS Standard: ESlint
  * 
-*/
+ */
 
 // Define Global Variables
 const sections = document.querySelectorAll("section");
 const navbar = document.getElementById("navbar__list");
+const button = document.getElementById("go__back");
 
 // Build the nav
 for (let i = 0; i < sections.length; i++) {
@@ -27,24 +28,35 @@ for (let i = 0; i < sections.length; i++) {
     navbar.appendChild(li);
 };
 
+let prevScrollPos = window.pageYOffset;
+
+window.onscroll = function () {
+    // Hide button
+    // reference: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        button.style.display = "block";
+    } else {
+        button.style.display = "none";
+    }
+
+    // Hide nav bar
+    // reference: https://www.w3schools.com/howto/howto_js_navbar_hide_scroll.asp
+    let currentScrollPos = window.pageYOffset;
+
+    if (prevScrollPos > currentScrollPos) {
+        document.getElementById("header").style.top = "0";
+    } else {
+        document.getElementById("header").style.top = "-10vh";
+    }
+    prevScrollPos = currentScrollPos;
+};
+
 // Scroll back to top
-// reference: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
-const button = document.getElementById("go__back");
-
-window.onscroll = function() {scroll()};
-
-function scroll() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    button.style.display = "block";
-  } else {
-    button.style.display = "none";
-  }
-};
-
 function goBack() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 };
+
 
 // Add class 'active' to section when near top of viewport
 
@@ -56,12 +68,8 @@ function goBack() {
  * End Main Functions
  * Begin Events
  * 
-*/
+ */
 
 // Build menu 
 
-// Scroll to section on link click
-
 // Set sections as active
-
-
