@@ -11,7 +11,7 @@
  * 
  * JS Standard: ESlint
  * 
- */
+**/
 
 // Define Global Variables
 const sections = document.querySelectorAll("section");
@@ -24,7 +24,6 @@ for (let i = 0; i < sections.length; i++) {
     const li = document.createElement("li");
 
     li.innerHTML = `<a href="#${sections[i].id}"> ${sections[i].id}</a>`;
-
     navbar.appendChild(li);
 };
 
@@ -37,7 +36,7 @@ window.onscroll = function () {
         button.style.display = "block";
     } else {
         button.style.display = "none";
-    }
+    };
 
     // Hide nav bar
     // reference: https://www.w3schools.com/howto/howto_js_navbar_hide_scroll.asp
@@ -47,8 +46,17 @@ window.onscroll = function () {
         document.getElementById("header").style.top = "0";
     } else {
         document.getElementById("header").style.top = "-10vh";
-    }
+    };
     prevScrollPos = currentScrollPos;
+
+    // Activate section
+    for (let section of sections) {
+        if (isActive(section)) {
+            section.classList.add("your-active-class");
+        } else {
+            section.classList.remove("your-active-class");
+        }
+    };
 };
 
 // Scroll back to top
@@ -57,19 +65,16 @@ function goBack() {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 };
 
+// Check if element is in viewport
+// reference: https://gist.github.com/davidtheclark/5515733
+function isActive(el) {
 
-// Add class 'active' to section when near top of viewport
+    let act = el.getBoundingClientRect();
 
-
-// Scroll to anchor ID using scrollTO event
-
-
-/**
- * End Main Functions
- * Begin Events
- * 
- */
-
-// Build menu 
-
-// Set sections as active
+    return (
+        act.top >= 0 &&
+        act.left >= 0 &&
+        act.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        act.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+};
