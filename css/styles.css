@@ -156,8 +156,8 @@ section:nth-of-type(even) .landing__container {
 }
 
 /* Background Circles */
-/* Note that background circles are created with psuedo elements before and after */
-/* Circles appear to be random do to use of :nth-of-type psuedo class */
+/* Note that background circles are created with pseudo elements before and after */
+/* Circles appear to be random do to use of :nth-of-type pseudo class */
 section:nth-of-type(odd) .landing__container::before {
     content: '';
     background: rgba(255, 255, 255, 0.187);
@@ -233,6 +233,11 @@ section.your-active-class .landing__container::before {
 section.your-active-class .landing__container::after {
     opacity: 1;
     animation: rotate 5s linear 0s infinite forwards reverse;
+}
+
+.active {
+    color:rgb(136, 219, 40) !important;
+    font-style: italic;
 }
 
 /* Section Active Styles Keyframe Animations */

@@ -11,12 +11,14 @@
  * 
  * JS Standard: ESlint
  * 
-**/
+ **/
 
 // Define Global Variables
 const sections = document.querySelectorAll("section");
 const navbar = document.getElementById("navbar__list");
 const button = document.getElementById("go__back");
+const lis = document.getElementsByTagName("a");
+let activeNav = null;
 
 // Build the nav
 for (let i = 0; i < sections.length; i++) {
@@ -32,22 +34,14 @@ let prevScrollPos = window.pageYOffset;
 window.onscroll = function () {
     // Hide button
     // reference: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
         button.style.display = "block";
     } else {
         button.style.display = "none";
+        for (let nav of lis) {
+            nav.classList.remove('active');
+        };
     };
-
-    // Hide nav bar
-    // reference: https://www.w3schools.com/howto/howto_js_navbar_hide_scroll.asp
-    let currentScrollPos = window.pageYOffset;
-
-    if (prevScrollPos > currentScrollPos) {
-        document.getElementById("header").style.top = "0";
-    } else {
-        document.getElementById("header").style.top = "-10vh";
-    };
-    prevScrollPos = currentScrollPos;
 
     // Activate section
     for (let section of sections) {
@@ -63,6 +57,9 @@ window.onscroll = function () {
 function goBack() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    for (let nav of lis) {
+        nav.classList.remove('active');
+    };
 };
 
 // Check if element is in viewport
@@ -77,4 +74,18 @@ function isActive(el) {
         act.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
         act.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
+};
+
+for (let i = 0; i < lis.length; i++) {
+    lis[i].addEventListener("click", () => {
+        if (lis[i] !== activeNav) {
+            lis[i].classList.add("active");
+        } else {
+            return
+        }
+        if (activeNav) {
+            activeNav.classList.remove('active');
+        }
+        activeNav = lis[i];
+    })
 };
