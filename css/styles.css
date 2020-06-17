@@ -8,7 +8,6 @@
  *
 */
 
-
 /* ---- Base Rules ---- */
 html {
     scroll-behavior: smooth;
@@ -16,16 +15,15 @@ html {
 
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background: rgb(255, 195, 145);
     background: linear-gradient(0deg, rgb(162, 182, 47) 0%, rgb(27, 99, 8) 100%);
     margin: 0;
-    color: #fff;
 }
 
-/* Typeography General*/
+/* Typography General*/
 h1 {
     font-size: 3em;
     margin: 2em 1rem;
+    color: #fff;
 }
 
 h2 {
@@ -77,7 +75,11 @@ section {
 
 .navbar__menu li a {
     text-decoration: none;
-    color: #eee;
+    transition: all 100ms ease-in-out;
+}
+/* To override default link color */
+a:-webkit-any-link {
+    color: #fff;
 }
 
 .navbar__menu .menu__link {
@@ -85,13 +87,19 @@ section {
     padding: 1em;
     font-weight: bold;
     text-decoration: none;
-    color: #000;
 }
 
 .navbar__menu .menu__link:hover {
-    background: #333;
-    color: #fff;
     transition: ease 0.3s all;
+}
+
+/* Navbar active state rules */
+.active {
+    font-style: italic;
+}
+
+.active a:-webkit-any-link {
+    color: rgb(122, 202, 31);
 }
 
 /* Button styles */
@@ -233,11 +241,6 @@ section.your-active-class .landing__container::before {
 section.your-active-class .landing__container::after {
     opacity: 1;
     animation: rotate 5s linear 0s infinite forwards reverse;
-}
-
-.active {
-    color:rgb(136, 219, 40) !important;
-    font-style: italic;
 }
 
 /* Section Active Styles Keyframe Animations */
